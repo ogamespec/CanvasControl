@@ -190,7 +190,10 @@ namespace CanvasControl
             foreach (var item in items)
             {
                 if (item.Visible)
+                {
                     item.Draw(gr);
+                    item.DrawText(gr);
+                }
             }
         }
 

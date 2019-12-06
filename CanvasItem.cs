@@ -11,20 +11,12 @@ using System.Drawing;
 
 namespace CanvasControl
 {
-    public enum ItemCategory
-    {
-        Unknown,                /// Не ассоциирован ни с чем
-        Node,                   /// Ассоциирован с вершиной графа
-        Edge,                   /// Ассоциирован с ребром графа
-    }
-
     public class CanvasItem
     {
         /// <summary>
         /// Топология (все координаты являются мировыми координатами)
         /// </summary>
 
-        public ItemCategory Category { get; set; } = ItemCategory.Unknown;
         public PointF Pos { get; set; } = new PointF();
         public PointF PosEnd { get; set; } = new PointF();
         public List<PointF> Points { get; set; } = new List<PointF>();
@@ -46,7 +38,9 @@ namespace CanvasControl
         public int BorderWidth { get; set; } = 1;
         public bool Visible { get; set; } = true;
         public bool Selected { get; set; } = false;
-        
+        public string Text { get; set; } = "";
+        public Color TextColor { get; set; } = Color.Black;
+
         public object UserData = null;
         protected CanvasControl parentControl = null;
 
@@ -85,6 +79,55 @@ namespace CanvasControl
         public virtual bool BoxTest(RectangleF rect)
         {
             return false;
+        }
+
+        public virtual void DrawText(Graphics gr)
+        {
+            Point topLeft = parentControl.WorldToScreen(Pos);
+
+            SizeF textSize = gr.MeasureString(Text, parentControl.Font);
+
+            float zf = (float)parentControl.Zoom / 100.0F;
+
+            gr.DrawString(Text, parentControl.Font, new SolidBrush(TextColor), topLeft.X, topLeft.Y);
+        }
+
+        public CanvasItem Clone()
+        {
+            CanvasItem item = CreateInstanceForClone();
+
+            item.Pos = new PointF(Pos.X, Pos.Y);
+            item.PosEnd = new PointF(PosEnd.X, PosEnd.Y);
+            
+            item.Points = new List<PointF>();
+            foreach (var p in Points)
+            {
+                item.Points.Add(new PointF(p.X, p.Y));
+            }
+
+            item.Width = Width;
+            item.Height = Height;
+
+            item.FrontColor = new Color();
+            item.FrontColor = FrontColor;
+            item.BorderColor = new Color();
+            item.BorderColor = BorderColor;
+            item.RoundedEdges = RoundedEdges;
+            item.BorderWidth = BorderWidth;
+            item.Visible = Visible;
+            item.Selected = Selected;
+            item.Text = Text;
+            item.TextColor = new Color();
+            item.TextColor = TextColor;
+
+            item.parentControl = parentControl;
+
+            return item;
+        }
+
+        public virtual CanvasItem CreateInstanceForClone()
+        {
+            return new CanvasItem();
         }
 
     }

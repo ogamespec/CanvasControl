@@ -15,21 +15,18 @@ namespace CanvasControl
     {
         public CanvasPoly(List<PointF> points)
         {
-            Category = ItemCategory.Node;
             Points = points;
             Width = 1;
         }
 
         public CanvasPoly(List<PointF> points, float width)
         {
-            Category = ItemCategory.Node;
             Points = points;
             Width = width;
         }
 
         public CanvasPoly(List<PointF> points, float width, Color color)
         {
-            Category = ItemCategory.Node;
             Points = points;
             Width = width;
             FrontColor = color;
@@ -89,6 +86,11 @@ namespace CanvasControl
                 }
             }
             return false;
+        }
+
+        public override CanvasItem CreateInstanceForClone()
+        {
+            return new CanvasPoly(Points);
         }
 
     }
