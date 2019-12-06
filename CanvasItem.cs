@@ -11,20 +11,12 @@ using System.Drawing;
 
 namespace CanvasControl
 {
-    public enum ItemCategory
-    {
-        Unknown,                /// Не ассоциирован ни с чем
-        Node,                   /// Ассоциирован с вершиной графа
-        Edge,                   /// Ассоциирован с ребром графа
-    }
-
     public class CanvasItem
     {
         /// <summary>
         /// Топология (все координаты являются мировыми координатами)
         /// </summary>
 
-        public ItemCategory Category { get; set; } = ItemCategory.Unknown;
         public PointF Pos { get; set; } = new PointF();
         public PointF PosEnd { get; set; } = new PointF();
         public List<PointF> Points { get; set; } = new List<PointF>();

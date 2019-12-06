@@ -14,27 +14,23 @@ namespace CanvasControl
     {
         public CanvasPolyLine()
         {
-            Category = ItemCategory.Edge;
             Width = 1;
         }
 
         public CanvasPolyLine(List<PointF> points)
         {
-            Category = ItemCategory.Edge;
             Points = points;
             Width = 1;
         }
 
         public CanvasPolyLine(List<PointF> points, float width)
         {
-            Category = ItemCategory.Edge;
             Points = points;
             Width = width;
         }
 
         public CanvasPolyLine(List<PointF> points, float width, Color color)
         {
-            Category = ItemCategory.Edge;
             Points = points;
             Width = width;
             FrontColor = color;

@@ -14,7 +14,6 @@ namespace CanvasControl
     {
         public CanvasRect(PointF pos, float width, float height)
         {
-            Category = ItemCategory.Node;
             Pos = pos;
             Width = width;
             Height = height;
@@ -22,7 +21,6 @@ namespace CanvasControl
 
         public CanvasRect(PointF pos, float width, float height, Color color)
         {
-            Category = ItemCategory.Node;
             Pos = pos;
             Width = width;
             Height = height;
