@@ -58,6 +58,24 @@ namespace CanvasControl
             }
         }
 
+        public override void DrawText(Graphics gr)
+        {
+            List<Point> translated = new List<Point>();
+
+            foreach (var p in Points)
+            {
+                translated.Add(parentControl.WorldToScreen(p));
+            }
+
+            if (translated.Count < 2)
+                return;
+
+            float zf = (float)parentControl.Zoom / 100.0F;
+
+            gr.DrawString(Text, parentControl.Font, new SolidBrush(TextColor), 
+                translated[translated.Count - 2].X, translated[translated.Count - 2].Y);
+        }
+
         public override bool HitTest(PointF point)
         {
             if (Points.Count < 2)

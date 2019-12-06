@@ -38,7 +38,9 @@ namespace CanvasControl
         public int BorderWidth { get; set; } = 1;
         public bool Visible { get; set; } = true;
         public bool Selected { get; set; } = false;
-        
+        public string Text { get; set; } = "";
+        public Color TextColor { get; set; } = Color.Black;
+
         public object UserData = null;
         protected CanvasControl parentControl = null;
 
@@ -77,6 +79,17 @@ namespace CanvasControl
         public virtual bool BoxTest(RectangleF rect)
         {
             return false;
+        }
+
+        public virtual void DrawText(Graphics gr)
+        {
+            Point topLeft = parentControl.WorldToScreen(Pos);
+
+            SizeF textSize = gr.MeasureString(Text, parentControl.Font);
+
+            float zf = (float)parentControl.Zoom / 100.0F;
+
+            gr.DrawString(Text, parentControl.Font, new SolidBrush(TextColor), topLeft.X, topLeft.Y);
         }
 
     }
