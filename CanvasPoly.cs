@@ -88,5 +88,10 @@ namespace CanvasControl
             return false;
         }
 
+        public override CanvasItem CreateInstanceForClone()
+        {
+            return new CanvasPoly(Points);
+        }
+
     }
 }

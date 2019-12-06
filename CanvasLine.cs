@@ -70,6 +70,11 @@ namespace CanvasControl
             return CanvasMath.LineIntersectsRect(Pos, PosEnd, rect);
         }
 
+        public override CanvasItem CreateInstanceForClone()
+        {
+            return new CanvasLine(Pos, PosEnd);
+        }
+
     }
 
 }

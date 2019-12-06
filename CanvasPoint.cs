@@ -88,5 +88,10 @@ namespace CanvasControl
             return rect.IntersectsWith(rect2);
         }
 
+        public override CanvasItem CreateInstanceForClone()
+        {
+            return new CanvasPoint(Pos);
+        }
+
     }
 }

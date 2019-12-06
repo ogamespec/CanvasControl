@@ -92,5 +92,43 @@ namespace CanvasControl
             gr.DrawString(Text, parentControl.Font, new SolidBrush(TextColor), topLeft.X, topLeft.Y);
         }
 
+        public CanvasItem Clone()
+        {
+            CanvasItem item = CreateInstanceForClone();
+
+            item.Pos = new PointF(Pos.X, Pos.Y);
+            item.PosEnd = new PointF(PosEnd.X, PosEnd.Y);
+            
+            item.Points = new List<PointF>();
+            foreach (var p in Points)
+            {
+                item.Points.Add(new PointF(p.X, p.Y));
+            }
+
+            item.Width = Width;
+            item.Height = Height;
+
+            item.FrontColor = new Color();
+            item.FrontColor = FrontColor;
+            item.BorderColor = new Color();
+            item.BorderColor = BorderColor;
+            item.RoundedEdges = RoundedEdges;
+            item.BorderWidth = BorderWidth;
+            item.Visible = Visible;
+            item.Selected = Selected;
+            item.Text = Text;
+            item.TextColor = new Color();
+            item.TextColor = TextColor;
+
+            item.parentControl = parentControl;
+
+            return item;
+        }
+
+        public virtual CanvasItem CreateInstanceForClone()
+        {
+            return new CanvasItem();
+        }
+
     }
 }
