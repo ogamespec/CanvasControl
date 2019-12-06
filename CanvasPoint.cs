@@ -14,11 +14,13 @@ namespace CanvasControl
     {
         public CanvasPoint(PointF pos)
         {
+            Category = ItemCategory.Node;
             Pos = pos;
         }
 
         public CanvasPoint(PointF pos, float width)
         {
+            Category = ItemCategory.Node;
             Pos = pos;
             Width = width;
             Height = width;
@@ -26,6 +28,7 @@ namespace CanvasControl
 
         public CanvasPoint(PointF pos, float width, Color color)
         {
+            Category = ItemCategory.Node;
             Pos = pos;
             Width = width;
             Height = width;
@@ -86,11 +89,6 @@ namespace CanvasControl
             RectangleF rect2 = new RectangleF(Pos.X - Width / 2, Pos.Y - Width / 2,
                 Width, Width);
             return rect.IntersectsWith(rect2);
-        }
-
-        public override CanvasItem CreateInstanceForClone()
-        {
-            return new CanvasPoint(Pos);
         }
 
     }
