@@ -14,7 +14,6 @@ namespace CanvasControl
     {
         public CanvasLine(PointF start, PointF end)
         {
-            Category = ItemCategory.Edge;
             Pos = start;
             PosEnd = end;
             Width = 1;
@@ -22,7 +21,6 @@ namespace CanvasControl
 
         public CanvasLine(PointF start, PointF end, float width)
         {
-            Category = ItemCategory.Edge;
             Pos = start;
             PosEnd = end;
             Width = width;
@@ -30,7 +28,6 @@ namespace CanvasControl
 
         public CanvasLine(PointF start, PointF end, Color color)
         {
-            Category = ItemCategory.Edge;
             Pos = start;
             PosEnd = end;
             Width = 1;
@@ -39,7 +36,6 @@ namespace CanvasControl
 
         public CanvasLine(PointF start, PointF end, float width, Color color)
         {
-            Category = ItemCategory.Edge;
             Pos = start;
             PosEnd = end;
             Width = width;
@@ -72,6 +68,11 @@ namespace CanvasControl
         public override bool BoxTest(RectangleF rect)
         {
             return CanvasMath.LineIntersectsRect(Pos, PosEnd, rect);
+        }
+
+        public override CanvasItem CreateInstanceForClone()
+        {
+            return new CanvasLine(Pos, PosEnd);
         }
 
     }
